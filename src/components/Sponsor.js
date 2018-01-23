@@ -44,7 +44,7 @@ export default class Sponsor extends React.Component {
       <div className="benevolent-sponsor">
         <div className="this-month">This month Redux Form is sponsored by</div>
         <img
-          src={`https://cs.berry.sh/l/${id}/pixel.png`}
+          src={`https://codesponsor.io/t/l/${id}/pixel.png`}
           style={{
             position: 'absolute',
             bottom: 0,
@@ -56,7 +56,7 @@ export default class Sponsor extends React.Component {
         />
         <a
           target="_blank"
-          href={`https://cs.berry.sh/c/${id}`}
+          href={`https://codesponsor.io/t/c/${id}/`}
           dangerouslySetInnerHTML={{ __html: copy }}
         />
       </div>
