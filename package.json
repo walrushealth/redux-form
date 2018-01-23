@@ -8,14 +8,12 @@
     "url": "https://github.com/erikras/redux-form"
   },
   "scripts": {
-    "build":
-      "cross-env NODE_ENV=production webpack src/index.js dist/bundle.js",
+    "build": "cross-env NODE_ENV=production webpack src/index.js dist/bundle.js",
     "clean": "rimraf dist lib",
     "lint": "eslint src",
     "prepublish": "npm run clean && npm run build"
   },
-  "author":
-    "Erik Rasmussen <rasmussenerik@gmail.com> (http://github.com/erikras)",
+  "author": "Erik Rasmussen <rasmussenerik@gmail.com> (http://github.com/erikras)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/erikras/redux-form/issues"
@@ -24,6 +22,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.3",
+    "js-cookie": "^2.2.0",
     "marked": "^0.3.5",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
@@ -61,12 +60,17 @@
     "url-loader": "^0.6.2",
     "webpack": "^3.9.0"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "npmName": "redux-form-website-template",
   "npmFileMap": [
     {
       "basePath": "/dist/",
-      "files": ["*.js", "*.css"]
+      "files": [
+        "*.js",
+        "*.css"
+      ]
     }
   ]
 }
