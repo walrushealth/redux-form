@@ -4,12 +4,12 @@ import App from './components/App'
 
 if (typeof window !== 'undefined') {
   // what a hack!! :-)
-  const __html = document.getElementsByTagName('h1')[0].parentNode.innerHTML
+  const content = document.getElementById('content')
   window.initReact = props =>
     ReactDOM.hydrate(
       <App {...props}>
-        <div dangerouslySetInnerHTML={{ __html }} />
+        <div dangerouslySetInnerHTML={{ __html: content.innerHTML }} />
       </App>,
-      document.getElementById('content')
+      content
     )
 }
