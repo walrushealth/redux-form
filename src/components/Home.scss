@@ -1,4 +1,4 @@
-@import "./constants";
+@import './constants';
 
 .home {
   .masthead {
@@ -33,6 +33,22 @@
     }
     .github {
       font-size: 1.5em;
+    }
+    hr {
+      border: none;
+      content: '';
+      background-image: linear-gradient(
+        to right,
+        rgba(238, 238, 238, 0) 0%,
+        rgba(238, 238, 238, 0.09999999999999998) 20%,
+        rgba(238, 238, 238, 0.4) 50%,
+        rgba(238, 238, 238, 0.09999999999999998) 90%,
+        rgba(238, 238, 238, 0) 100%
+      );
+      display: block;
+      height: 2px;
+      margin: 15px auto !important;
+      width: 80% !important;
     }
   }
   .options {

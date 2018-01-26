@@ -42,7 +42,7 @@ export default class Sponsor extends React.Component {
     const { loaded, id, copy } = this.state
     return loaded ? (
       <div className="benevolent-sponsor">
-        <div className="this-month">This month Redux Form is sponsored by</div>
+        {/*<div className="this-month">This month Redux Form is sponsored by</div>*/}
         <img
           src={`https://codesponsor.io/t/l/${id}/pixel.png`}
           style={{
