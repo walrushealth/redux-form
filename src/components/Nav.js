@@ -98,7 +98,16 @@ class Nav extends Component {
             'Submit Validation',
             1
           )}
-          {this.renderItem('/examples/asyncValidation', 'Async Validation', 1)}
+          {this.renderItem(
+            '/examples/asyncValidation',
+            'Async Blur Validation',
+            1
+          )}
+          {this.renderItem(
+            '/examples/asyncChangeValidation',
+            'Async Change Validation',
+            1
+          )}
           {this.renderItem(
             '/examples/initializeFromState',
             'Initializing from State',
