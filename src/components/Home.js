@@ -1,6 +1,6 @@
 import React from 'react'
 import GithubButton from './GithubButton'
-import Sponsor from './Sponsor'
+import CodeFund from './CodeFund'
 
 const Home = ({ version }) => {
   const styles = require('./Home.scss')
@@ -32,7 +32,7 @@ const Home = ({ version }) => {
         />
         <div style={{ textAlign: 'center' }}>
           <hr />
-          <Sponsor />
+          <CodeFund />
         </div>
       </div>
       <div className={styles.options}>
