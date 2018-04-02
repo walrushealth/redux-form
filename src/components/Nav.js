@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import marked from 'marked'
-import Sponsor from './Sponsor'
+import CodeFund from './CodeFund'
 import styles from './Nav.scss'
 
 const formatLabel = label => /<p>(.+)<\/p>/.exec(marked(label))[1]
@@ -52,7 +52,7 @@ class Nav extends Component {
           <a href={url} className={styles.brand}>
             Redux Form
           </a>
-          <Sponsor />
+          <CodeFund />
           {this.renderItem('/docs/GettingStarted.md', 'Getting Started')}
           {this.renderItem('/docs/MigrationGuide.md', '`v6` Migration Guide')}
           {this.renderItem('/docs/ValueLifecycle.md', 'Value Lifecycle')}
