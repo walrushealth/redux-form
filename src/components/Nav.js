@@ -52,7 +52,7 @@ class Nav extends Component {
           <a href={url} className={styles.brand}>
             Redux Form
           </a>
-          <CodeFund />
+          <CodeFund template="square" />
           {this.renderItem('/docs/GettingStarted.md', 'Getting Started')}
           {this.renderItem('/docs/MigrationGuide.md', '`v6` Migration Guide')}
           {this.renderItem('/docs/ValueLifecycle.md', 'Value Lifecycle')}
