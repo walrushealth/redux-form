@@ -10,7 +10,11 @@ export default class CodeFund extends React.Component {
     const { template } = this.props
     return (
       <div>
-        <div id="codefund_ad" className="benevolent-sponsor" />
+        <div
+          id="codefund_ad"
+          className="benevolent-sponsor"
+          style={{ minHeight: '200px' }}
+        />
         <script
           src={`https://codefund.io/scripts/${id}/embed.js?template=${template ||
             'centered'}&theme=dark`}
