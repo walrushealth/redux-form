@@ -6,18 +6,21 @@ export default class CodeFund extends React.Component {
     return false
   }
 
-  render() {
+  componentDidMount() {
     const { template } = this.props
+    const script = document.createElement('script')
+    script.src = `https://codefund.io/scripts/${id}/embed.js?template=${template ||
+      'centered'}&theme=dark`
+    document.body.appendChild(script)
+  }
+
+  render() {
     return (
       <div>
         <div
           id="codefund_ad"
           className="benevolent-sponsor"
           style={{ minHeight: '200px' }}
-        />
-        <script
-          src={`https://codefund.io/scripts/${id}/embed.js?template=${template ||
-            'centered'}&theme=dark`}
         />
       </div>
     )
