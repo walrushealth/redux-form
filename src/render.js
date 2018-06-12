@@ -13,7 +13,6 @@ const render = ({ component, title, path, version, breadcrumbs }) =>
       media="screen, projection" rel="stylesheet" type="text/css"/>
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
           media="screen, projection" rel="stylesheet" type="text/css"/>
-    <link href="/carbon.css" media="screen, projection" rel="stylesheet" type="text/css"/>
     <meta itemprop="name" content="Redux Form"/>
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="Redux Form"/>

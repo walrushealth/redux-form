@@ -1,7 +1,6 @@
-@import "./constants";
+@import './constants';
 
 .nav {
-
   button {
     position: fixed;
     padding: 10px 15px;
@@ -41,7 +40,7 @@
     top: 0;
     bottom: 0;
     background: white;
-    box-shadow: 3px 0 10px rgba(0, 0, 0, .15);
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.15);
     width: $nav-width;
     color: #333;
     overflow-y: auto;
@@ -49,11 +48,15 @@
     transition: left 0.3s ease-in-out;
   }
 
-  a {
+  & > a,
+  & > nav > a {
     text-decoration: none;
     color: #666;
     padding: 8px;
     border-bottom: 1px solid #ccc;
+    &:first-of-type {
+      border-top: 1px solid #ccc;
+    }
     display: block;
     font-size: 18px;
     &:hover {

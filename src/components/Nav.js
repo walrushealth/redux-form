@@ -52,7 +52,7 @@ class Nav extends Component {
           <a href={url} className={styles.brand}>
             Redux Form
           </a>
-          <CodeFund template="square" />
+          <CodeFund template="image-only" />
           {this.renderItem('/docs/GettingStarted.md', 'Getting Started')}
           {this.renderItem('/docs/MigrationGuide.md', '`v6` Migration Guide')}
           {this.renderItem('/docs/ValueLifecycle.md', 'Value Lifecycle')}
@@ -64,6 +64,7 @@ class Nav extends Component {
           {this.renderItem('/docs/api/Fields.md', '`Fields`', 1)}
           {this.renderItem('/docs/api/FieldArray.md', '`FieldArray`', 1)}
           {this.renderItem('/docs/api/Form.md', '`Form`', 1)}
+          {this.renderItem('/docs/api/FormName.md', '`FormName`', 1)}
           {this.renderItem('/docs/api/FormSection.md', '`FormSection`', 1)}
           {this.renderItem('/docs/api/FormValues.md', '`formValues()`', 1)}
           {this.renderItem(
