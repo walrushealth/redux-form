@@ -1,15 +1,20 @@
 {
   "name": "redux-form-website-template",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "The template for the redux-form website",
   "main": "./dist/bundle.js",
+  "module": "./es/index.js",
+  "modules.root": "./es",
+  "jsnext:main": "./es/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/erikras/redux-form"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack src/index.js dist/bundle.js",
-    "clean": "rimraf dist lib",
+    "build": "npm run clean && npm run build:lib && npm run build:es",
+    "build:lib": "cross-env NODE_ENV=production webpack src/index.js dist/bundle.js",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --ignore __tests__",
+    "clean": "rimraf dist lib es",
     "lint": "eslint src",
     "prepublish": "npm run clean && npm run build"
   },
@@ -33,6 +38,7 @@
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
     "babel-loader": "^7.1.2",
@@ -61,6 +67,7 @@
     "webpack": "^3.9.0"
   },
   "files": [
+    "es",
     "dist"
   ],
   "npmName": "redux-form-website-template",
