@@ -1,5 +1,5 @@
 import React from 'react'
-const id = '4f9aabe5-1dda-413e-b01e-3174c48e4762'
+const id = '141'
 
 const heights = {
   'image-only': 211,
@@ -14,7 +14,7 @@ export default class CodeFund extends React.Component {
   componentDidMount() {
     const { template } = this.props
     const script = document.createElement('script')
-    script.src = `https://codefund.io/scripts/${id}/embed.js?template=${template}&theme=dark`
+    script.src = `https://codefund.app/properties/${id}/funder.js?template=${template}`
     document.body.appendChild(script)
   }
 
@@ -24,7 +24,7 @@ export default class CodeFund extends React.Component {
     return (
       <div>
         <div
-          id="codefund_ad"
+          id="codefund"
           className={`benevolent-sponsor template-${template}`}
           style={{ minHeight: height + 'px' }}
         />
