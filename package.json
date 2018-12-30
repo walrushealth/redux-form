@@ -1,6 +1,6 @@
 {
   "name": "redux-form-website-template",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "The template for the redux-form website",
   "main": "./dist/bundle.js",
   "module": "./es/index.js",

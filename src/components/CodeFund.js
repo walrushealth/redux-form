@@ -11,13 +11,6 @@ export default class CodeFund extends React.Component {
     return false
   }
 
-  componentDidMount() {
-    const { template } = this.props
-    const script = document.createElement('script')
-    script.src = `https://codefund.app/properties/${id}/funder.js?template=${template}`
-    document.body.appendChild(script)
-  }
-
   render() {
     const { template } = this.props
     const height = heights[template] || 150
@@ -27,6 +20,10 @@ export default class CodeFund extends React.Component {
           id="codefund"
           className={`benevolent-sponsor template-${template}`}
           style={{ minHeight: height + 'px' }}
+        />
+        <script
+          src={`https://codefund.app/properties/${id}/funder.js?template=${template}`}
+          async="async"
         />
       </div>
     )
