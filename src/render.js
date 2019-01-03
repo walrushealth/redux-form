@@ -26,6 +26,9 @@ const render = ({ component, title, path, version, breadcrumbs }) =>
         margin: 0;
       }
     </style>
+    <script type="text/javascript">var abp;</script>
+    <script type="text/javascript" src="https://cdn2.codefund.app/assets/px.js?ch=1"></script>
+    <script type="text/javascript" src="https://cdn2.codefund.app/assets/px.js?ch=2"></script>
   </head>
   <body>
   <div id="content">
