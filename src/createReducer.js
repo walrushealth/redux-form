@@ -14,6 +14,7 @@ import {
   BLUR,
   CHANGE,
   CLEAR_ASYNC_ERROR,
+  CLEAR_FAILURE,
   CLEAR_SUBMIT,
   CLEAR_SUBMIT_ERRORS,
   DESTROY,
@@ -40,7 +41,7 @@ import {
 import createDeleteInWithCleanUp from './deleteInWithCleanUp'
 import plain from './structure/plain'
 import type { Action, Structure } from './types.js.flow'
-import { isFunction } from 'lodash'
+import { isFunction, isObject } from 'lodash'
 
 const shouldDelete = ({ getIn }) => (state, path) => {
   let initialValuesPath = null
@@ -326,6 +327,9 @@ function createReducer<M, L>(structure: Structure<M, L>) {
       }
       return result
     },
+    [CLEAR_FAILURE](state) {
+      return deleteIn(state, 'failure')
+    },
     [CLEAR_SUBMIT](state) {
       return deleteIn(state, 'triggerSubmit')
     },
@@ -574,7 +578,10 @@ function createReducer<M, L>(structure: Structure<M, L>) {
       return setIn(state, 'asyncValidating', field || true)
     },
     [START_SUBMIT](state) {
-      return setIn(state, 'submitting', true)
+      let result = state
+      result = deleteIn(result, 'failure')
+      result = setIn(result, 'submitting', true)
+      return result
     },
     [STOP_ASYNC_VALIDATION](state, { payload }) {
       let result = state
@@ -598,23 +605,37 @@ function createReducer<M, L>(structure: Structure<M, L>) {
       result = deleteIn(result, 'submitting')
       result = deleteIn(result, 'submitFailed')
       result = deleteIn(result, 'submitSucceeded')
-      if (payload && Object.keys(payload).length) {
-        const { _error, ...fieldErrors } = payload
-        if (_error) {
-          result = setIn(result, 'error', _error)
-        } else {
-          result = deleteIn(result, 'error')
-        }
-        if (Object.keys(fieldErrors).length) {
-          result = setIn(result, 'submitErrors', fromJS(fieldErrors))
-        } else {
-          result = deleteIn(result, 'submitErrors')
-        }
+
+      // Note: Because the Error instance is not passed as the payload (which is
+      // suggested: https://github.com/redux-utilities/flux-standard-action#payload)
+      // we have to sniff out error type by its shape (object vs string)
+      const isError = isObject(payload) && Object.keys(payload).length
+      const isFailure = !isObject(payload) && payload
+      if (isError || isFailure) {
         result = setIn(result, 'submitFailed', true)
+        if (isError) {
+          const { _error, ...fieldErrors } = payload
+          result = deleteIn(result, 'failure')
+          if (_error) {
+            result = setIn(result, 'error', _error)
+          } else {
+            result = deleteIn(result, 'error')
+          }
+          if (Object.keys(fieldErrors).length) {
+            result = setIn(result, 'submitErrors', fromJS(fieldErrors))
+          } else {
+            result = deleteIn(result, 'submitErrors')
+          }
+        } else if (isFailure) {
+          result = deleteIn(result, 'error')
+          result = setIn(result, 'failure', payload)
+        }
       } else {
         result = deleteIn(result, 'error')
+        result = deleteIn(result, 'failure')
         result = deleteIn(result, 'submitErrors')
       }
+
       return result
     },
     [SET_SUBMIT_FAILED](

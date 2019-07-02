@@ -3,9 +3,12 @@ import isPromise from 'is-promise'
 import type { SubmitFunction } from './types'
 import type { Props } from './createReduxForm'
 import SubmissionError from './SubmissionError'
+import SubmissionFailureError from './SubmissionFailureError'
 import type { List } from 'immutable'
 
 const isSubmissionError = error => error && error.name === SubmissionError.name
+const isSubmissionFailureError = error =>
+  error && error.name === SubmissionFailureError.name
 
 const mergeErrors = ({ asyncErrors, syncErrors }) =>
   asyncErrors && typeof asyncErrors.merge === 'function'
@@ -50,9 +53,13 @@ const executeSubmit = (
   try {
     result = submit(values, dispatch, props)
   } catch (submitError) {
-    const error = isSubmissionError(submitError)
-      ? submitError.errors
-      : undefined
+    let error
+    if (isSubmissionError(submitError)) {
+      error = submitError.errors
+    } else if (isSubmissionFailureError(submitError)) {
+      error = submitError.message
+    }
+
     stopSubmit(error)
     setSubmitFailed(...fields)
     if (onSubmitFail) {
@@ -82,9 +89,13 @@ const executeSubmit = (
           return submitResult
         },
         submitError => {
-          const error = isSubmissionError(submitError)
-            ? submitError.errors
-            : undefined
+          let error
+          if (isSubmissionError(submitError)) {
+            error = submitError.errors
+          } else if (isSubmissionFailureError(submitError)) {
+            error = submitError.message
+          }
+
           stopSubmit(error)
           setSubmitFailed(...fields)
           if (onSubmitFail) {

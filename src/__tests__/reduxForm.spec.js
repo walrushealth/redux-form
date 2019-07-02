@@ -17,6 +17,7 @@ import immutableExpectations from '../structure/immutable/__tests__/expectations
 import plain from '../structure/plain'
 import plainExpectations from '../structure/plain/__tests__/expectations'
 import SubmissionError from '../SubmissionError'
+import SubmissionFailureError from '../SubmissionFailureError'
 
 import FormWrapper from '../Form'
 
@@ -153,6 +154,7 @@ const describeReduxForm = (name, structure, combineReducers, setup) => {
         'blur',
         'change',
         'clearAsyncError',
+        'clearFailure',
         'clearFields',
         'clearSubmit',
         'clearSubmitErrors',
@@ -160,6 +162,7 @@ const describeReduxForm = (name, structure, combineReducers, setup) => {
         'dirty',
         'dispatch',
         'error',
+        'failure',
         'form',
         'handleSubmit',
         'initialValues',
@@ -2485,6 +2488,50 @@ const describeReduxForm = (name, structure, combineReducers, setup) => {
       expect(onSubmitFail.mock.calls[0][1]).toEqual(store.dispatch)
       expect(onSubmitFail.mock.calls[0][2]).toBeInstanceOf(SubmissionError)
       expect(caught).toBe(errors)
+    })
+
+    it('should call onSubmitFail with errors if sync submit fails by throwing SubmissionFailureError', () => {
+      const store = makeStore({
+        testForm: {}
+      })
+      const failure = 'failure'
+      const onSubmitFail = jest.fn()
+
+      const Form = () => (
+        <form>
+          <Field name="username" component="input" type="text" />
+          <Field name="password" component="input" type="text" />
+        </form>
+      )
+
+      const Decorated = reduxForm({
+        form: 'testForm',
+        onSubmit: () => {
+          throw new SubmissionFailureError(failure)
+        },
+        onSubmitFail
+      })(Form)
+
+      const ref = React.createRef()
+      TestUtils.renderIntoDocument(
+        <Provider store={store}>
+          <Decorated ref={ref} />
+        </Provider>
+      )
+
+      expect(typeof ref.current.submit).toBe('function')
+
+      expect(onSubmitFail).not.toHaveBeenCalled()
+
+      const caught = ref.current.submit()
+
+      expect(onSubmitFail).toHaveBeenCalled()
+      expect(onSubmitFail.mock.calls[0][0]).toEqual(failure)
+      expect(onSubmitFail.mock.calls[0][1]).toEqual(store.dispatch)
+      expect(onSubmitFail.mock.calls[0][2]).toBeInstanceOf(
+        SubmissionFailureError
+      )
+      expect(caught).toBe(failure)
     })
 
     it('should call onSubmitFail with undefined if sync submit fails by throwing other error', () => {
